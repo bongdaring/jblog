@@ -63,10 +63,12 @@ public class BlogController {
 			}
 		} else {
 			CategoryVo categoryVo = categoryService.findRecentCategory(blogId);
-			List<PostVo> postList = postService.findByCategoryNo(categoryVo.getNo());
-			PostVo postVo = postService.findFirstPost(postList);
-			model.addAttribute("postList",postList);
-			model.addAttribute("post", postVo);
+			if(categoryVo != null) {
+				List<PostVo> postList = postService.findByCategoryNo(categoryVo.getNo());
+				PostVo postVo = postService.findFirstPost(postList);
+				model.addAttribute("postList",postList);
+				model.addAttribute("post", postVo);
+			}
 		}
 		
 		return "blog/main";
