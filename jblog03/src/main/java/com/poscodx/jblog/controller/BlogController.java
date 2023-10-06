@@ -62,10 +62,9 @@ public class BlogController {
 				model.addAttribute("post", postVo);
 			}
 		} else {
-			CategoryVo categoryVo = categoryService.findRecentCategory(blogId);
-			if(categoryVo != null) {
-				List<PostVo> postList = postService.findByCategoryNo(categoryVo.getNo());
-				PostVo postVo = postService.findFirstPost(postList);
+			PostVo postVo = postService.findRecent(blogId);
+			if(postVo != null) {
+				List<PostVo> postList = postService.findByCategoryNo(postVo.getCategoryNo());
 				model.addAttribute("postList",postList);
 				model.addAttribute("post", postVo);
 			}
@@ -94,7 +93,7 @@ public class BlogController {
 		blogVo.setBlogId(blogId);
 		blogService.updateBlog(blogVo);
 
-		return "redirect:/" + blogId;
+		return "redirect:/" + blogId+"/admin/basic";
 	}
 
 	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)

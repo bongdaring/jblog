@@ -8,5 +8,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>jblog03</module>
+		<module>jblog04</module>
+		<module>jblog05</module>
 	</modules>
 </project>

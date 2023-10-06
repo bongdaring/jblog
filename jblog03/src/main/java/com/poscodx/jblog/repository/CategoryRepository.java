@@ -33,6 +33,7 @@ public class CategoryRepository {
 	public CategoryVo findRecentCategory(String blogId) {
 		return sqlSession.selectOne("category.findRecentCategory", blogId);
 	}
+
 	
 	
 }

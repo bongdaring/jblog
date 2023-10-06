@@ -11,7 +11,7 @@
 	<select id="findAll" resultType="categoryvo"
 		parameterType="String">
 		<![CDATA[
-			select c.no, c.name as name, count(p.category_no) as postCount, description
+			select c.no as no, c.name as name, count(p.category_no) as postCount, description
 				from category c 
 				left join post p on c.no = p.category_no 
 				where c.blog_id = #{blogId }
@@ -20,9 +20,11 @@
 	</select>
 	<select id="findRecentCategory" resultType="categoryvo" parameterType="String">
 		<![CDATA[
-		  select no from category where blog_id = #{blogId } order by no desc limit 1
+			select c.no as no from post p join (select * from category c where c.blog_id = #{blogId }) c on p.category_no = c.no order by p.no desc
+			limit 1;
 		]]>
 	</select>
+
 	<delete id="deleteByNo" parameterType="long">
 		<![CDATA[
 		  	delete from category where no=#{no }

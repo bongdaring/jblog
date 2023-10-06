@@ -46,6 +46,10 @@ public class PostService {
 	}
 
 	public PostVo findFirstPost(List<PostVo> postList) {
+		PostVo vo = postList.stream().sorted(Comparator.comparing(PostVo::getNo)).findFirst().get();
+		System.out.println("vo:"+vo.getNo());
 		return postList.stream().sorted(Comparator.comparing(PostVo::getNo)).findFirst().get();
 	}
+
+
 }

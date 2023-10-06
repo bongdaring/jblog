@@ -26,7 +26,7 @@
 	</select>
 	<select id="findRecent" resultType="postvo" parameterType="String">
 		<![CDATA[
-		  select no, title, contents from post where category_no = (select max(no) from category where blog_id = #{blogId }) order by no desc limit 1
+		  select p.no as no, p.title as title, p.contents as contents , c.no as categoryNo from post p join (select * from category c where c.blog_id = #{blogId }) c on p.category_no = c.no order by p.no desc limit 1;
 		]]>
 	</select>
 	<delete id="deleteByCategoryNo" parameterType="long">
